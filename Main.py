@@ -201,6 +201,21 @@ class MainWindow(QDialog):
             self.input_path.setText(file_name)
 
 
+    def download_button(self):
+        url = self.input_url.text()
+        save_path = self.input_path.text()
+        quality = self.combo_quality.currentText()
+        if self.radio_single.isChecked():
+            playlist = False
+        else:
+            playlist = True
+        if self.check_video.isChecked():
+            Download(url, save_path, quality, playlist).mp4_download()
+        else:
+            Download(url, save_path, quality, playlist).mp3_download()
+        self.input_url.setText("")
+        self.label_done.setText("Download Done!")
+
 
     
 
