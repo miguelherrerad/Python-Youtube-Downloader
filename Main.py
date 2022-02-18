@@ -188,11 +188,17 @@ class MainWindow(QDialog):
         self.label_quality.setFont(QtGui.QFont('Tahoma'))
         self.label_quality.setAlignment(QtCore.Qt.AlignCenter)
         self.label_quality.setText("Download Quality:")
-        
+
 
     def min(self, event): 
         
         self.setWindowState(self.windowState() | QWindow.Minimized)
+
+
+    def set_button(self):
+        file_name = QFileDialog.getExistingDirectory()
+        if file_name:
+            self.input_path.setText(file_name)
 
 
 
