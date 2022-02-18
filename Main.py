@@ -2,6 +2,11 @@ import os
 import sys
 from os import path
 import subprocess
+from DownloadMethods import Download
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import (QApplication, QVBoxLayout, QWidget, QPushButton, QGridLayout, QSpacerItem, QSizePolicy, QLabel, QDialog, QFrame, QToolButton, QHBoxLayout, QStyle,  QMainWindow, QFileDialog, QLineEdit )
+from PyQt5.QtCore import Qt, QCoreApplication, QObject, QRunnable, QTimer, QSize
+from PyQt5.QtGui import QCursor, QWindow
 
 class MainWindow(QDialog):
     def __init__(self, *args, **kwargs):
@@ -66,7 +71,7 @@ class MainWindow(QDialog):
         self.initUI()
 
 
-        def initUI(self):
+    def initUI(self):
         self.widget = QWidget(self)
         self.widget.setObjectName('Custom_Widget')
         layout = QVBoxLayout(self)
@@ -183,6 +188,12 @@ class MainWindow(QDialog):
         self.label_quality.setFont(QtGui.QFont('Tahoma'))
         self.label_quality.setAlignment(QtCore.Qt.AlignCenter)
         self.label_quality.setText("Download Quality:")
+        
+
+    def min(self, event): 
+        
+        self.setWindowState(self.windowState() | QWindow.Minimized)
+
 
 
     
