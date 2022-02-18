@@ -217,5 +217,43 @@ class MainWindow(QDialog):
         self.label_done.setText("Download Done!")
 
 
+    def command_exists_ffmpeg(self):
+        try:
+            fnull = open(os.devnull, 'w')
+            subprocess.call(['ffmpeg'], stdout=fnull, stderr=subprocess.STDOUT)
+            return True
+        except OSError:
+            return False 
+
+    def command_exists(self, n):
+        try:
+            fnull = open(os.devnull, 'w')
+            subprocess.call([n], stdout=fnull, stderr=subprocess.STDOUT)
+            return True
+        except OSError:
+            return False 
+
+
+if __name__ == "__main__":
+    argu = True
+    app = QApplication(sys.argv)
+    while argu == True:
+        if MainWindow().command_exists('choco') == True:
+            print('primero pasado')
+            while argu == True:
+                if MainWindow().command_exists('ffmpeg') == True:
+                    print('segundo pasado')
+                    window = MainWindow()
+                    window.exec_()
+                    QTimer.singleShot(200, app.quit)
+                    sys.exit(app.exec_())
+                else: 
+                    os.system("echo y|choco install ffmpeg")
+        else:
+            os.system('@powershell -NoProfile -ExecutionPolicy Bypass -Command “iex ((New-Object System.Net.WebClient).DownloadString(‘https://chocolatey.org/install.ps1’))” && SET “PATH=%PATH%;%ALLUSERSPROFILE%/chocolatey/bin”')
+    
+
+
+
     
 
